@@ -19,10 +19,10 @@ class Expense {
         BREAKFAST("Breakfast"),
         CAR_RENTAL("Car Rental");
 
-        private final String name;
+        private final String expenseName;
 
-        Type(String name) {
-            this.name = name;
+        Type(String expenseName) {
+            this.expenseName = expenseName;
         }
     }
 
@@ -34,7 +34,7 @@ class Expense {
         this.amount = amount;
     }
     public String getName() {
-        return type.name;
+        return type.expenseName;
     }
 }
 

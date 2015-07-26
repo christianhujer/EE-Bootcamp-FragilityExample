@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import static fragility.Expense.Type.CAR_RENTAL;
 import static fragility.Expense.Type.DINNER;
 import static org.junit.Assert.assertEquals;
 
-public class FragilityExampleTest {
+public class ExpenseReportPrinterTest {
 
     private ByteArrayOutputStream out;
     private PrintStream oldOut;
@@ -49,7 +48,7 @@ public class FragilityExampleTest {
             new Expense(BREAKFAST, 1001),
             new Expense(CAR_RENTAL, 4000));
 
-        new FragilityExample().printReport(expenses);
+        ExpenseReportPrinter.printReport(new Expenses(expenses));
 
         String actual = getStdoutWithoutFirstLine();
         assertEquals(EXPECTED, actual);

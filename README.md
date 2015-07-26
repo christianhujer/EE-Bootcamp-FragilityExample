@@ -7,6 +7,7 @@ The solution provided by Robert C. Martin is also available [here on Github](htt
 ## Refactorings not yet done
 The following refactorings haven't been done in the session due to lack of time and exhaustion - the discussions we had were much more important.
 
+* Fixing the typo in the comment.
 * Replace the polymorphism in the `enum Expense.Type` with pure data.
   The `isMeal()` methods do not differ in behavior, they only differ in data.
   This difference can be captured using different field values instead of different method implementations.
@@ -17,6 +18,15 @@ The following refactorings haven't been done in the session due to lack of time 
   It currently assembles and prints the report, which is two different responsibilities.
   If these responsibilities are split, the unit test could be simplified:
   The unit test would no longer need to take care of redirecting `stdout`.
+
+
+## Also skipped
+IntelliJ IDEA can be more helpful than how we used it in the session.
+For example, it could be configured to:
+
+* Automatically insert `final` for variables (as you've seen, my heart beats functional).
+* Run a lot of inspections that uncover potential programming mistakes and maintainability flaws.
+
 
 ## Differences to the solution provided by Robert C. Martin
 

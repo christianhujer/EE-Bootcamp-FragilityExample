@@ -10,31 +10,30 @@ package fragility;
 import java.util.Date;
 import java.util.List;
 
-import static fragility.Expense.Type.BREAKFAST;
-import static fragility.Expense.Type.DINNER;
-
 class Expense {
     public enum Type {
-        DINNER("Dinner") {
+        DINNER("Dinner", 5000) {
             public boolean isMeal() {
                 return true;
             }
         },
-        BREAKFAST("Breakfast") {
+        BREAKFAST("Breakfast", 1000) {
             public boolean isMeal() {
                 return true;
             }
         },
-        CAR_RENTAL("Car Rental") {
+        CAR_RENTAL("Car Rental", Integer.MAX_VALUE) {
             public boolean isMeal() {
                 return false;
             }
         };
 
         private final String expenseName;
+        private final int expenseLimit;
 
-        Type(String expenseName) {
+        Type(String expenseName, int expenseLimit) {
             this.expenseName = expenseName;
+            this.expenseLimit = expenseLimit;
         }
         public abstract boolean isMeal();
     }
@@ -52,6 +51,10 @@ class Expense {
     public boolean isMeal() {
         return type.isMeal();
     }
+    public boolean isMealOverExpense() {
+        return amount > type.expenseLimit;
+    }
+
 }
 
 public class FragilityExample {
@@ -69,9 +72,7 @@ public class FragilityExample {
 
             String expenseName = expense.getName();
 
-            String mealOverExpensesMarker =
-                    ((expense.type == DINNER && expense.amount > 5000) ||
-                            (expense.type == BREAKFAST && expense.amount > 1000)) ? "X" : " ";
+            String mealOverExpensesMarker = expense.isMealOverExpense() ? "X" : " ";
 
             System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
             total += expense.amount;

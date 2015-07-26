@@ -52,11 +52,11 @@ public class FragilityExample {
                     break;
             }
 
-            String mealOverexpensesMarker =
+            String mealOverExpensesMarker =
                     ((expense.type == DINNER && expense.amount > 5000) ||
                             (expense.type == BREAKFAST && expense.amount > 1000)) ? "X" : " ";
 
-            System.out.println(expenseName + "\t" + expense.amount + "\t" + "mealOverExpensesMarker");
+            System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
             total += expense.amount;
         }
 

@@ -20,11 +20,11 @@ public class FragilityExampleTest {
     private ByteArrayOutputStream out;
     private PrintStream oldOut;
     private static final String EXPECTED = "\n" +
-            "Dinner\t5001\tmealOverExpensesMarker\n" +
-            "Dinner\t5000\tmealOverExpensesMarker\n" +
-            "Breakfast\t1000\tmealOverExpensesMarker\n" +
-            "Breakfast\t1001\tmealOverExpensesMarker\n" +
-            "Car Rental\t4000\tmealOverExpensesMarker\n" +
+            "Dinner\t5001\tX\n" +
+            "Dinner\t5000\t \n" +
+            "Breakfast\t1000\t \n" +
+            "Breakfast\t1001\tX\n" +
+            "Car Rental\t4000\t \n" +
             "Meal expenses : 12002\n" +
             "Total expenses : 16002\n";
 

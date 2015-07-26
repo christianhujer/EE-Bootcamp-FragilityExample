@@ -5,6 +5,8 @@
 // modifing existing one.  
 // Also discover whether it is violating any other principle. 
 
+package fragility;
+
 import java.util.Date;
 import java.util.List;
 

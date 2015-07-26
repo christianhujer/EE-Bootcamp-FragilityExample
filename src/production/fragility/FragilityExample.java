@@ -15,26 +15,42 @@ import static fragility.Expense.Type.DINNER;
 
 class Expense {
     public enum Type {
-        DINNER("Dinner"),
-        BREAKFAST("Breakfast"),
-        CAR_RENTAL("Car Rental");
+        DINNER("Dinner") {
+            public boolean isMeal() {
+                return true;
+            }
+        },
+        BREAKFAST("Breakfast") {
+            public boolean isMeal() {
+                return true;
+            }
+        },
+        CAR_RENTAL("Car Rental") {
+            public boolean isMeal() {
+                return false;
+            }
+        };
 
         private final String expenseName;
 
         Type(String expenseName) {
             this.expenseName = expenseName;
         }
+        public abstract boolean isMeal();
     }
-
     public Type type;
-    public int amount;
 
+    public int amount;
     public Expense(Type type, int amount) {
         this.type = type;
         this.amount = amount;
     }
+
     public String getName() {
         return type.expenseName;
+    }
+    public boolean isMeal() {
+        return type.isMeal();
     }
 }
 
@@ -47,7 +63,7 @@ public class FragilityExample {
         System.out.println("Expenses " + new Date() + "\n");
 
         for (Expense expense : expenses) {
-            if (expense.type == DINNER || expense.type == BREAKFAST) {
+            if (expense.isMeal()) {
                 mealExpenses += expense.amount;
             }
 
@@ -64,4 +80,5 @@ public class FragilityExample {
         System.out.println("Meal expenses : " + mealExpenses);
         System.out.println("Total expenses : " + total);
     }
+
 }

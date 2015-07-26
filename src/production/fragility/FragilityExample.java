@@ -60,26 +60,33 @@ class Expense {
 public class FragilityExample {
 
     public void printReport(List<Expense> expenses) {
-        int total = 0;
-        int mealExpenses = 0;
-
         System.out.println("Expenses " + new Date() + "\n");
 
+        for (Expense expense : expenses) {
+            String mealOverExpensesMarker = expense.isMealOverExpense() ? "X" : " ";
+            System.out.println(expense.getName() + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
+        }
+
+        System.out.println("Meal expenses : " + getMealExpenses(expenses));
+        System.out.println("Total expenses : " + getTotal(expenses));
+    }
+
+    private static int getTotal(List<Expense> expenses) {
+        int total = 0;
+        for (Expense expense : expenses) {
+            total += expense.amount;
+        }
+        return total;
+    }
+
+    private static int getMealExpenses(List<Expense> expenses) {
+        int mealExpenses = 0;
         for (Expense expense : expenses) {
             if (expense.isMeal()) {
                 mealExpenses += expense.amount;
             }
-
-            String expenseName = expense.getName();
-
-            String mealOverExpensesMarker = expense.isMealOverExpense() ? "X" : " ";
-
-            System.out.println(expenseName + "\t" + expense.amount + "\t" + mealOverExpensesMarker);
-            total += expense.amount;
         }
-
-        System.out.println("Meal expenses : " + mealExpenses);
-        System.out.println("Total expenses : " + total);
+        return mealExpenses;
     }
 
 }

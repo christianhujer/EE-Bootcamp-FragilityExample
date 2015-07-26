@@ -14,15 +14,27 @@ import static fragility.Expense.Type.BREAKFAST;
 import static fragility.Expense.Type.DINNER;
 
 class Expense {
-    public enum Type {DINNER, BREAKFAST, CAR_RENTAL}
+    public enum Type {
+        DINNER("Dinner"),
+        BREAKFAST("Breakfast"),
+        CAR_RENTAL("Car Rental");
 
-    ;
+        private final String name;
+
+        Type(String name) {
+            this.name = name;
+        }
+    }
+
     public Type type;
     public int amount;
 
     public Expense(Type type, int amount) {
         this.type = type;
         this.amount = amount;
+    }
+    public String getName() {
+        return type.name;
     }
 }
 
@@ -39,18 +51,7 @@ public class FragilityExample {
                 mealExpenses += expense.amount;
             }
 
-            String expenseName = "";
-            switch (expense.type) {
-                case DINNER:
-                    expenseName = "Dinner";
-                    break;
-                case BREAKFAST:
-                    expenseName = "Breakfast";
-                    break;
-                case CAR_RENTAL:
-                    expenseName = "Car Rental";
-                    break;
-            }
+            String expenseName = expense.getName();
 
             String mealOverExpensesMarker =
                     ((expense.type == DINNER && expense.amount > 5000) ||

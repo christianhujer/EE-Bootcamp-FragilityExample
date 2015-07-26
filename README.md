@@ -30,4 +30,4 @@ From the perspective of the OCP, the solution provided by Robert C. Martin is *m
 
 However, I think that in this case the purity is overdone - and even wrong in design.
 I do not agree with having different classes when they actually do not differ in behavior but only in data.
-Classes which show the same behavior but with different classes should actually instead be objects of the same class.
+Classes which show the same behavior but with different data should actually instead be objects of the same class.

@@ -7,14 +7,26 @@ import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import static fragility.Expense.Type.BREAKFAST;
+import static fragility.Expense.Type.CAR_RENTAL;
+import static fragility.Expense.Type.DINNER;
 import static org.junit.Assert.assertEquals;
 
 public class FragilityExampleTest {
 
     private ByteArrayOutputStream out;
     private PrintStream oldOut;
+    private static final String EXPECTED = "\n" +
+            "Dinner\t5001\tmealOverExpensesMarker\n" +
+            "Dinner\t5000\tmealOverExpensesMarker\n" +
+            "Breakfast\t1000\tmealOverExpensesMarker\n" +
+            "Breakfast\t1001\tmealOverExpensesMarker\n" +
+            "Car Rental\t4000\tmealOverExpensesMarker\n" +
+            "Meal expenses : 12002\n" +
+            "Total expenses : 16002\n";
 
     @Before
     public void redirectStdout() throws Exception {
@@ -30,26 +42,21 @@ public class FragilityExampleTest {
 
     @Test
     public void testPrintReport() {
-        final String expected = //"Expenses Sun Jul 26 11:57:22 IST 2015\n" +
-                "\n" +
-                "Dinner\t5001\tmealOverExpensesMarker\n" +
-                "Dinner\t5000\tmealOverExpensesMarker\n" +
-                "Breakfast\t1000\tmealOverExpensesMarker\n" +
-                "Breakfast\t1001\tmealOverExpensesMarker\n" +
-                "Car Rental\t4000\tmealOverExpensesMarker\n" +
-                "Meal expenses : 12002\n" +
-                "Total expenses : 16002\n";
+        final List<Expense> expenses = Arrays.asList(
+            new Expense(DINNER, 5001),
+            new Expense(DINNER, 5000),
+            new Expense(BREAKFAST, 1000),
+            new Expense(BREAKFAST, 1001),
+            new Expense(CAR_RENTAL, 4000));
 
-        final List<Expense> expenses = new ArrayList<>();
-        expenses.add(new Expense(Expense.Type.DINNER, 5001));
-        expenses.add(new Expense(Expense.Type.DINNER, 5000));
-        expenses.add(new Expense(Expense.Type.BREAKFAST, 1000));
-        expenses.add(new Expense(Expense.Type.BREAKFAST, 1001));
-        expenses.add(new Expense(Expense.Type.CAR_RENTAL, 4000));
         new FragilityExample().printReport(expenses);
 
-        String actual = out.toString();
-        actual = actual.substring(actual.indexOf('\n') + 1);
-        assertEquals(expected, actual);
+        String actual = getStdoutWithoutFirstLine();
+        assertEquals(EXPECTED, actual);
+    }
+
+    private String getStdoutWithoutFirstLine() {
+        final String actual = out.toString();
+        return actual.substring(actual.indexOf('\n') + 1);
     }
 }
